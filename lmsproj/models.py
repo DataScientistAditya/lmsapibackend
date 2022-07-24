@@ -219,7 +219,7 @@ class ExamSubmit(models.Model):
     fourthanswer = models.CharField(max_length=100)
     fifthanswer = models.CharField(max_length=100)
     grade = models.IntegerField(default=0)
-    dateofsubmission = models.DateTimeField(auto_now_add=True, null=TRUE)
+    dateofsubmission = models.DateTimeField(auto_now_add=True, null=True)
 
 
 
