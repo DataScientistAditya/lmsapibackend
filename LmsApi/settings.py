@@ -34,7 +34,7 @@ SECRET_KEY = "django-insecure-=3+)=^ckn)-&-r#k0frhn#pul1pzncl-4-9)7r3i8$dz_yi$qi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['lmsapibackend.herokuapp.com']
 
 
 # Application definition
