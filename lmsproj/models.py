@@ -207,7 +207,7 @@ class TaskSubmission(models.Model):
     taskanswer = models.CharField(max_length=1000)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="tasktobesubmited")
     grade = models.IntegerField(default=0)
-    dateofsubmission = models.DateTimeField(auto_now_add=True, null=TRUE)
+    dateofsubmission = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class ExamSubmit(models.Model):
