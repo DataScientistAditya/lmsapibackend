@@ -1,4 +1,3 @@
-from tkinter import E
 from django.contrib import admin
 from lmsproj.models import Account,Courses, Exam,Batch,Task,TaskSubmission,BatchCourseAssign
 
