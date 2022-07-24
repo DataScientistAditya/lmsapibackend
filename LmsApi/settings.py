@@ -13,14 +13,14 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
-from decouple import config
+# from decouple import config
 
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "django-insecure-=3+)=^ckn)-&-r#k0frhn#pul1pzncl-4-9)7r3i8$dz_yi$qi"
 
 # environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 # env = environ.Env()
@@ -32,7 +32,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
