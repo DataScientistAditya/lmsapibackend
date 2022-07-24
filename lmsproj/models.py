@@ -1,5 +1,3 @@
-from pickle import TRUE
-from unicodedata import name
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.conf import settings
