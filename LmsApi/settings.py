@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'lmsproj',
     'corsheaders',
-    'rest_framework_swagger',
     'Chat',
     'channels',
 ]

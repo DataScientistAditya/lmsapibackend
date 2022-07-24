@@ -1,6 +1,5 @@
 aioredis==1.3.1
 amqp==1.4.9
-anyjson
 asgiref==3.5.2
 async-timeout==4.0.2
 attrs==21.4.0
@@ -22,7 +21,6 @@ Deprecated==1.2.13
 Django==3.2.14
 django-cors-headers==3.13.0
 django-environ==0.9.0
-django-rest-swagger==2.2.0
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.2.0
 gunicorn==20.1.0
