@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+from decouple import config
 # from decouple import config
 
 
@@ -21,6 +22,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-=3+)=^ckn)-&-r#k0frhn#pul1pzncl-4-9)7r3i8$dz_yi$qi"
+
+
 
 # environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 # env = environ.Env()
@@ -32,10 +35,17 @@ SECRET_KEY = "django-insecure-=3+)=^ckn)-&-r#k0frhn#pul1pzncl-4-9)7r3i8$dz_yi$qi
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['lmsapibackend.herokuapp.com']
+#'lmsapibackend.herokuapp.com','143.110.250.89','http://localhost:8000'
+ALLOWED_HOSTS = []
+DEBUG = config('DEBUG', default=False, cast=bool)
 
+
+ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
+
+WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
+
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 # Application definition
 
@@ -78,7 +88,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ROOT_URLCONF = 'LmsApi.urls'
+# ROOT_URLCONF = 'LmsApi.urls'
 
 TEMPLATES = [
     {
@@ -96,8 +106,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'LmsApi.wsgi.application'
-ASGI_APPLICATION = 'LmsApi.routing.application'
+# WSGI_APPLICATION = 'LmsApi.wsgi.application'
+# ASGI_APPLICATION = 'LmsApi.routing.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -115,12 +125,12 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -157,8 +167,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -226,3 +236,46 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = config('AWS_LOCATION')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+TEMP = os.path.join(BASE_DIR, 'temp')
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'CodingWithMitch Team <noreply@codingwithmitch.com>'
+
+
+BASE_URL = "http://143.110.250.89"
